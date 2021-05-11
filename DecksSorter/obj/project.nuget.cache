@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "w7UWqKpZ10R6ucByorWblOijZo2969+e9I12xaofjfW0qqbyzAR3T54HXBpXWkSjHniFsE2758Dr2+cjRWXSwQ==",
+  "dgSpecHash": "aWxSsKH4k8I8QFd3kWa2F7AxsT/MqIrh5eE4HhlH1y/DnVa7f/ilKCNpWlVW+/Ias8hK5qlsY7lvpl64Q4+K4g==",
   "success": true,
-  "projectFilePath": "/home/artem/Рабочий стол/УЦСБ/DecksSorter/DecksSorter/DecksSorter.csproj",
+  "projectFilePath": "/home/artem/Рабочий стол/УЦСБ/decks-sorter/DecksSorter/DecksSorter.csproj",
   "expectedPackageFiles": [
     "/home/artem/.nuget/packages/microsoft.entityframeworkcore/5.0.5/microsoft.entityframeworkcore.5.0.5.nupkg.sha512",
     "/home/artem/.nuget/packages/microsoft.entityframeworkcore.abstractions/5.0.5/microsoft.entityframeworkcore.abstractions.5.0.5.nupkg.sha512",

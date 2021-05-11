@@ -1,12 +1,9 @@
-using System;
-using DecksSorter.DB;
 using DecksSorter.DTO;
 using DecksSorter.Models;
-using DecksSorter.Services;
+using DecksSorter.Repositories;
 using DecksSorter.Shufflers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -31,12 +28,14 @@ namespace DecksSorter
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "DecksSorter", Version = "v1"});
             });
-            services.AddDbContext<DecksContext>(options =>
-                options.UseNpgsql(Environment.GetEnvironmentVariable("DB_CONNECTION_STRING")));
+            // services.AddDbContext<DecksContext>(options =>
+            //     options.UseNpgsql(Environment.GetEnvironmentVariable("DB_CONNECTION_STRING")));
+            // services.AddDbContext<DecksContext>(options =>
+            //     options.UseNpgsql("User ID=postgres;Password=postgres;Host=localhost;Database=Decks;Integrated Security=true;Pooling=true;"));
             services.AddSingleton<IShuffler, SimpleShuffler>();
             services.AddSingleton<IConverter<Deck, DeckDto>, DeckConverter>();
             services.AddSingleton<IConverter<Card, CardDto>, CardConverter>();
-            services.AddScoped<DeckService>();
+            services.AddScoped<IDeckRepository, DeckRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

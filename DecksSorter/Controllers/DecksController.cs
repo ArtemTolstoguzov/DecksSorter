@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using DecksSorter.DTO;
 using DecksSorter.Models;
-using DecksSorter.Services;
+using DecksSorter.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DecksSorter.Controllers
@@ -11,19 +11,19 @@ namespace DecksSorter.Controllers
     [ApiController]
     public class DecksController : ControllerBase
     {
-        private readonly DeckService deckService;
+        private readonly IDeckRepository deckRepository;
         private readonly IConverter<Deck, DeckDto> dtoConverter;
 
-        public DecksController(DeckService deckService, IConverter<Deck, DeckDto> dtoConverter)
+        public DecksController(IDeckRepository deckRepository, IConverter<Deck, DeckDto> dtoConverter)
         {
-            this.deckService = deckService;
+            this.deckRepository = deckRepository;
             this.dtoConverter = dtoConverter;
         }
 
         [HttpGet]
         public IEnumerable<string> GetAllDecks()
         {
-            return deckService.GetAllDecks();
+            return deckRepository.GetAllDecks();
         }
 
         [HttpGet("{name}")]
@@ -31,7 +31,7 @@ namespace DecksSorter.Controllers
         {
             try
             {
-                var deck = await deckService.GetDeck(name);
+                var deck = await deckRepository.GetDeck(name);
                 return dtoConverter.Convert(deck);
             }
             catch
@@ -43,7 +43,7 @@ namespace DecksSorter.Controllers
         [HttpPost]
         public async Task<ActionResult> CreateDeck()
         {
-            var newDeck = await deckService.CreateDeck();
+            var newDeck = await deckRepository.CreateDeck();
             return CreatedAtAction(nameof(GetDeck), new {name = newDeck.Name}, dtoConverter.Convert(newDeck));
         }
 
@@ -52,8 +52,8 @@ namespace DecksSorter.Controllers
         {
             try
             {
-                var deck = await deckService.GetDeck(name);
-                await deckService.DeleteDeck(deck);
+                var deck = await deckRepository.GetDeck(name);
+                await deckRepository.DeleteDeck(deck);
                 return NoContent();
             }
             catch
@@ -67,9 +67,9 @@ namespace DecksSorter.Controllers
         {
             try
             {
-                var deck = await deckService.GetDeck(name);
-                await deckService.ShuffleDeck(deck);
-                var shuffleDeck = await deckService.GetDeck(name);
+                var deck = await deckRepository.GetDeck(name);
+                await deckRepository.ShuffleDeck(deck);
+                var shuffleDeck = await deckRepository.GetDeck(name);
                 return AcceptedAtAction(nameof(GetDeck), new {name = shuffleDeck.Name},
                     dtoConverter.Convert(shuffleDeck));
             }

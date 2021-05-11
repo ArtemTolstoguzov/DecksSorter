@@ -14,7 +14,7 @@ namespace DecksSorter.DTO
 
         public DeckDto Convert(Deck source)
         {
-            var cards = source.Cards.Select(cardConverter.Convert);
+            var cards = source.Cards.Select(cardConverter.Convert).ToList();
             return new DeckDto {Cards = cards, Name = source.Name};
         }
     }

@@ -867,11 +867,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/artem/Рабочий стол/УЦСБ/DecksSorter/DecksSorter/DecksSorter.csproj",
+      "projectUniqueName": "/home/artem/Рабочий стол/УЦСБ/decks-sorter/DecksSorter/DecksSorter.csproj",
       "projectName": "DecksSorter",
-      "projectPath": "/home/artem/Рабочий стол/УЦСБ/DecksSorter/DecksSorter/DecksSorter.csproj",
+      "projectPath": "/home/artem/Рабочий стол/УЦСБ/decks-sorter/DecksSorter/DecksSorter.csproj",
       "packagesPath": "/home/artem/.nuget/packages/",
-      "outputPath": "/home/artem/Рабочий стол/УЦСБ/DecksSorter/DecksSorter/obj/",
+      "outputPath": "/home/artem/Рабочий стол/УЦСБ/decks-sorter/DecksSorter/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/artem/.nuget/NuGet/NuGet.Config"

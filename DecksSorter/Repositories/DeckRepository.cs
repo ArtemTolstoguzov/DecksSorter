@@ -7,14 +7,14 @@ using DecksSorter.Models;
 using DecksSorter.Shufflers;
 using Microsoft.EntityFrameworkCore;
 
-namespace DecksSorter.Services
+namespace DecksSorter.Repositories
 {
-    public class DeckService
+    public class DeckRepository : IDeckRepository
     {
         private readonly DecksContext dbContext;
         private readonly IShuffler shuffler;
 
-        public DeckService(DecksContext dbContext, IShuffler shuffler)
+        public DeckRepository(DecksContext dbContext, IShuffler shuffler)
         {
             this.dbContext = dbContext;
             this.shuffler = shuffler;
