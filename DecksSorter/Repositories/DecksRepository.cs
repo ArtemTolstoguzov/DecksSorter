@@ -9,12 +9,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DecksSorter.Repositories
 {
-    public class DeckRepository : IDeckRepository
+    public class DecksRepository : IDecksRepository
     {
         private readonly DecksContext dbContext;
         private readonly IShuffler shuffler;
 
-        public DeckRepository(DecksContext dbContext, IShuffler shuffler)
+        public DecksRepository(DecksContext dbContext, IShuffler shuffler)
         {
             this.dbContext = dbContext;
             this.shuffler = shuffler;

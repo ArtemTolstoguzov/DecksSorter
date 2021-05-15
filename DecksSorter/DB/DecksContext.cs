@@ -24,8 +24,13 @@ namespace DecksSorter.DB
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasPostgresEnum(null, "card_suits", new[] { "Clubs", "Diamonds", "Hearts", "Spades" })
-                .HasPostgresEnum(null, "card_values", new[] { "Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King" })
+            modelBuilder.HasPostgresEnum(null, "card_suits", new[] {"Clubs", "Diamonds", "Hearts", "Spades"})
+                .HasPostgresEnum(null, "card_values",
+                    new[]
+                    {
+                        "Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen",
+                        "King"
+                    })
                 .HasAnnotation("Relational:Collation", "ru_RU.UTF-8");
 
             modelBuilder.Entity<Card>(entity =>

@@ -1,9 +1,12 @@
+using System;
+using DecksSorter.DB;
 using DecksSorter.DTO;
 using DecksSorter.Models;
 using DecksSorter.Repositories;
 using DecksSorter.Shufflers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -13,12 +16,12 @@ namespace DecksSorter
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
+        
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
-
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -28,14 +31,12 @@ namespace DecksSorter
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "DecksSorter", Version = "v1"});
             });
-            // services.AddDbContext<DecksContext>(options =>
-            //     options.UseNpgsql(Environment.GetEnvironmentVariable("DB_CONNECTION_STRING")));
-            // services.AddDbContext<DecksContext>(options =>
-            //     options.UseNpgsql("User ID=postgres;Password=postgres;Host=localhost;Database=Decks;Integrated Security=true;Pooling=true;"));
-            services.AddSingleton<IShuffler, SimpleShuffler>();
+            services.AddDbContext<DecksContext>(options =>
+                options.UseNpgsql(Environment.GetEnvironmentVariable("DB_CONNECTION_STRING")));
+            services.AddScoped<IShuffler, SimpleShuffler>();
             services.AddSingleton<IConverter<Deck, DeckDto>, DeckConverter>();
             services.AddSingleton<IConverter<Card, CardDto>, CardConverter>();
-            services.AddScoped<IDeckRepository, DeckRepository>();
+            services.AddScoped<IDecksRepository, DecksRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

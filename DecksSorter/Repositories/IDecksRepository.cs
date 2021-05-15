@@ -4,7 +4,7 @@ using DecksSorter.Models;
 
 namespace DecksSorter.Repositories
 {
-    public interface IDeckRepository
+    public interface IDecksRepository
     {
         public IEnumerable<string> GetAllDecks();
         public Task<Deck> GetDeck(string name);

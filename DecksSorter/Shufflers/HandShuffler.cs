@@ -9,7 +9,7 @@ namespace DecksSorter.Shufflers
         
         public void Shuffle(Deck deck)
         {
-            var shuffleCount = rnd.Next(7, 10);
+            var shuffleCount = rnd.Next(10, 15);
             for (var _ = 0; _ < shuffleCount; _++)
             {
                 var deviation = deck.Cards.Count / 10;

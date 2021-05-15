@@ -11,19 +11,19 @@ namespace DecksSorter.Controllers
     [ApiController]
     public class DecksController : ControllerBase
     {
-        private readonly IDeckRepository deckRepository;
+        private readonly IDecksRepository decksRepository;
         private readonly IConverter<Deck, DeckDto> dtoConverter;
 
-        public DecksController(IDeckRepository deckRepository, IConverter<Deck, DeckDto> dtoConverter)
+        public DecksController(IDecksRepository decksRepository, IConverter<Deck, DeckDto> dtoConverter)
         {
-            this.deckRepository = deckRepository;
+            this.decksRepository = decksRepository;
             this.dtoConverter = dtoConverter;
         }
 
         [HttpGet]
         public IEnumerable<string> GetAllDecks()
         {
-            return deckRepository.GetAllDecks();
+            return decksRepository.GetAllDecks();
         }
 
         [HttpGet("{name}")]
@@ -31,7 +31,7 @@ namespace DecksSorter.Controllers
         {
             try
             {
-                var deck = await deckRepository.GetDeck(name);
+                var deck = await decksRepository.GetDeck(name);
                 return dtoConverter.Convert(deck);
             }
             catch
@@ -43,7 +43,7 @@ namespace DecksSorter.Controllers
         [HttpPost]
         public async Task<ActionResult> CreateDeck()
         {
-            var newDeck = await deckRepository.CreateDeck();
+            var newDeck = await decksRepository.CreateDeck();
             return CreatedAtAction(nameof(GetDeck), new {name = newDeck.Name}, dtoConverter.Convert(newDeck));
         }
 
@@ -52,8 +52,8 @@ namespace DecksSorter.Controllers
         {
             try
             {
-                var deck = await deckRepository.GetDeck(name);
-                await deckRepository.DeleteDeck(deck);
+                var deck = await decksRepository.GetDeck(name);
+                await decksRepository.DeleteDeck(deck);
                 return NoContent();
             }
             catch
@@ -67,9 +67,9 @@ namespace DecksSorter.Controllers
         {
             try
             {
-                var deck = await deckRepository.GetDeck(name);
-                await deckRepository.ShuffleDeck(deck);
-                var shuffleDeck = await deckRepository.GetDeck(name);
+                var deck = await decksRepository.GetDeck(name);
+                await decksRepository.ShuffleDeck(deck);
+                var shuffleDeck = await decksRepository.GetDeck(name);
                 return AcceptedAtAction(nameof(GetDeck), new {name = shuffleDeck.Name},
                     dtoConverter.Convert(shuffleDeck));
             }

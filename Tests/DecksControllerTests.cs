@@ -22,7 +22,7 @@ namespace Tests
         private readonly List<string> testDecksNames;
         private readonly DeckDto testDeckDto;
         private readonly DeckConverter converter = new(new CardConverter());
-        private readonly Mock<IDeckRepository> mockRepo = new();
+        private readonly Mock<IDecksRepository> mockRepo = new();
         private readonly DecksController controller;
         
         public DecksControllerTests()
