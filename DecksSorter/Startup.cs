@@ -31,11 +31,8 @@ namespace DecksSorter
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "DecksSorter", Version = "v1"});
             });
-            
             services.AddDbContext<DecksContext>(options =>
-                options.UseNpgsql("User ID=postgres;Password=postgres;Host=localhost;Database=Decks;Integrated Security=true;Pooling=true;"));
-            // services.AddDbContext<DecksContext>(options =>
-            //     options.UseNpgsql(Environment.GetEnvironmentVariable("DB_CONNECTION_STRING")));
+                options.UseNpgsql(Environment.GetEnvironmentVariable("DB_CONNECTION_STRING")));
             services.AddScoped<IShuffler, SimpleShuffler>();
             services.AddSingleton<IConverter<Deck, DeckDto>, DeckConverter>();
             services.AddSingleton<IConverter<Card, CardDto>, CardConverter>();
