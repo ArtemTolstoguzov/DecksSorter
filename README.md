@@ -14,5 +14,5 @@ RESTful сервис, реализованный на ASP.NET Core с испол
 5.  Перейти на http://localhost:8000/swagger
 
 ### Алгоритм перетасовки
-Алгоритм перетасовки задается в DI-контейнере в файле `Startup.cs`:
+Алгоритм перетасовки задается в DI-контейнере в файле `Startup.cs`:  
 `services.AddScoped<IShuffler, SimpleShuffler>();` (по умолчанию стоит "простая")
