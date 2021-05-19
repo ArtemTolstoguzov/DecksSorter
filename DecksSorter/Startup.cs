@@ -1,4 +1,6 @@
 using System;
+using System.IO;
+using System.Reflection;
 using DecksSorter.DB;
 using DecksSorter.DTO;
 using DecksSorter.Models;
@@ -30,7 +32,11 @@ namespace DecksSorter
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "DecksSorter", Version = "v1"});
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
             });
+            
             services.AddDbContext<DecksContext>(options =>
                 options.UseNpgsql(Environment.GetEnvironmentVariable("DB_CONNECTION_STRING")));
             services.AddScoped<IShuffler, SimpleShuffler>();
